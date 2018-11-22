@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      购物车
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <dl class='cart-list'>
+    <dt>
+      <ion-checkbox color='danger'></ion-checkbox>
+      <img src="assets/imgs/03.jpg" alt="">
+    </dt>
+    <dd>
+      <h2>这是一个商品标题</h2>
+      <div class="cart-info">
+        <div class="cart-price">
+          100元
+        </div>
+        <div class="cart-num">
+          <div class="input-left">
+            -
+          </div>
+          <div class="input-center">
+            <input type="text" value='1' readonly='readonly'>
+          </div>
+          <div class="input-right">
+            +
+          </div>
+        </div>
+      </div>
+    </dd>
+  </dl>
+</ion-content>
+
+
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class='all-price'>
+      <ion-checkbox color='danger'></ion-checkbox>
+      全选    <strong>合计: 2000元</strong>  
+    </div>
+    <ion-buttons end>
+      <button ion-button icon-right >
+        Send
+        <ion-icon name='send'></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

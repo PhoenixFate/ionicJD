@@ -1,17 +1,55 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>京东</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content>
+  <ion-slides pager loop='true' autoplay='2000' class='my-slides'>
+
+    <ion-slide>
+      <img src="assets/imgs/slide01.png" alt="" />
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/imgs/slide02.png" alt="" />
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/imgs/slide03.jpg" alt="" />
+    </ion-slide>
+
+  </ion-slides>
+
+  <div class='my-title'>
+    精品推荐
+  </div>
+
+  <div class='slide-product'>
+    <ion-scroll scrollX="true">
+      <ul class='clearfix' [ngStyle]="{'width':recListWidth}">
+        <li *ngFor='let item of recList'>
+          <img src="{{item.pic}}" alt="">
+          <p>{{item.title}}</p>
+        </li>
+      </ul>
+    </ion-scroll>
+
+  </div>
+
+  <div class='my-title'>
+    猜你喜欢
+  </div>
+
+  <div class='index-product'> 
+    <ion-row>
+      <ion-col col-6 *ngFor='let item of recList'>
+
+        <img src="{{item.pic}}" alt="">
+        <p>{{item.title}}</p>
+
+      </ion-col>
+    </ion-row>
+  </div>
+
 </ion-content>
