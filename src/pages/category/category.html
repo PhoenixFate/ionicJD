@@ -1,8 +1,13 @@
 <ion-header>
+ 
   <ion-navbar>
-    <ion-title>
-      商品分类
-    </ion-title>
+    <ion-searchbar [(ngModel)]="myInput">
+    </ion-searchbar>
+    <ion-buttons end>
+      <button ion-button >
+        搜索
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -10,24 +15,18 @@
   <div class="cate-content">
     <div class="cate-left">
       <ion-list>
-        <ion-item *ngFor='let item of cateList'>
-          {{item}}
+        <ion-item *ngFor='let item of leftCate' (click)='getRightData(item["_id"])'>
+          {{item.title}}
         </ion-item>
       </ion-list>
     </div>
     <div class="cate-right">
       <ion-row>
-        <ion-col col-4 *ngFor='let item of recList'>
-          <img src="{{item.pic}}" alt="">
+        <ion-col col-4 *ngFor='let item of rightCate' [navPush]='ProductListPage' [navParams]="{'cid':item['_id']}">
+          <img [src]="configProvider.urlHead+item.pic" alt="">
           <p>{{item.title}}</p>
         </ion-col>
       </ion-row>
-      <ion-row>
-          <ion-col col-4 *ngFor='let item of recList'>
-            <img src="{{item.pic}}" alt="">
-            <p>{{item.title}}</p>
-          </ion-col>
-        </ion-row>
     </div>
   </div>
 </ion-content>

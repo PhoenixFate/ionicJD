@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>user</ion-title>
+    <ion-title>用户中心</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,8 +19,8 @@
       <img src="assets/imgs/user.png" alt="">
     </div>
     <div class="login-reg">
-      <button ion-button>登入</button>
-      <button ion-button>注册</button>
+      <button ion-button [navPush]='LoginPage'>登录</button>
+      <button ion-button [navPush]='RegisterPage'>注册</button>
     </div>
   </div>
   <ion-list inset>

@@ -1,0 +1,46 @@
+page-search {
+    .search-title {
+        font-size: 14px;
+        font-weight: bold;
+        padding:5px 0;
+        margin:0;
+    }
+    .hotlist {
+        padding:5px;
+    }
+    .hotlist p {
+        padding:10px 0;
+    }
+    .hotlist span {
+        padding: 5px 10px;
+        background-color: #eee;
+        border-radius: 5px;
+        margin: 5px;
+        display: inline-block;
+    }
+    .history {
+        border-top:10px solid #eee;
+        padding:5px;
+        font-size: 14px;
+    }
+
+    .sub-header{
+        height: 40px;
+        line-height: 40px;
+        position:fixed;
+        top:52px;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+        display:flex;
+        z-index: 2;
+        background-color: #fff;
+        div {
+            flex:1;
+            text-align: center;
+        }
+    }
+
+    .list-content ion-list{
+        margin-top:40px!important;
+    }
+}

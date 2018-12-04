@@ -6,13 +6,38 @@ page-category {
         .cate-left {
             width: 100px;
             height: 100%;
+            border-right: 10px solid #eee;
             overflow-y: auto;
+            color:#666;
+            ion-label {
+                font-size: 14px;
+            }
         }
     
         .cate-right {
             height: 100%;
             flex:1;
             overflow-y: auto;
+            ion-label {
+                font-size: 14px;
+            }
+            ion-col {
+                border:1px solid #eee;
+                margin-left:-1px;
+                margin-top: -1px;
+                p {
+                    text-align: center;
+                    color:#666;
+                }
+                img {
+                    display: block;
+                    margin: 0 auto;
+                    max-width: 90%;
+                }
+            }
+            ion-col:nth-child(3n){
+                border-right:0px;
+            }
         }
     }
 
