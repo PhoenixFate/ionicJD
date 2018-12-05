@@ -1,6 +1,6 @@
 // import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http,Jsonp } from '@angular/http';
+import { Http,Jsonp,Headers } from '@angular/http';
 import { ConfigProvider } from '../config/config';
 /*
   Generated class for the HttpServiceProvider provider.
@@ -10,6 +10,7 @@ import { ConfigProvider } from '../config/config';
 */
 @Injectable()
 export class HttpServiceProvider {
+  private headers=new Headers({'Content-Type':'application/json'});
 
   constructor(public jsonp:Jsonp,public http:Http,public configProvider:ConfigProvider) {
     //console.log('Hello HttpServiceProvider Provider');
@@ -38,4 +39,10 @@ export class HttpServiceProvider {
     })
   }
 
+  doPost(url,json,callback){
+    let realUrl=this.configProvider.urlHead+url;
+    this.http.post(realUrl,JSON.stringify(json),{headers:this.headers}).subscribe((data)=>{
+      callback(data.json());
+    })
+  }
 }

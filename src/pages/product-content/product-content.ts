@@ -16,27 +16,25 @@ import { HttpServiceProvider } from '../../providers/http-service/http-service';
   templateUrl: 'product-content.html',
 })
 export class ProductContentPage {
-  public pet=true;
-  public tabs='plist';
-  public list=[];
-  constructor(public navCtrl: NavController, 
+  public pet = true;
+  public tabs = 'plist';
+  public list = [];
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public configProvider:ConfigProvider,
-    public httpServiceProvider:HttpServiceProvider) {
-      let id=navParams.get('id');
-      console.log(id);
-      this.requestData(id);
+    public configProvider: ConfigProvider,
+    public httpServiceProvider: HttpServiceProvider) {
+    let id = navParams.get('id');
+    this.requestData(id);
   }
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad ProductContentPage');
   }
 
-  requestData(id){
-    this.list=[];
-    this.httpServiceProvider.requestDataJsonp('api/pcontent?id='+id,(data)=>{
+  requestData(id) {
+    this.list = [];
+    this.httpServiceProvider.requestDataJsonp('api/pcontent?id=' + id, (data) => {
       this.list.push(data['result']);
-      console.log(this.list);
     })
   }
 

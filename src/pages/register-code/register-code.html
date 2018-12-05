@@ -19,15 +19,17 @@
       马上验证你的手机，激活你的账户
     </h4>
     <p class='code-sign-p'>
-      验证码已通过短信方式发送至xxxxxx，请输入验证码完成验证
+      验证码已通过短信方式发送至{{this.tel}}，请输入验证码完成验证
     </p>
   </div>
   <div class="code-page">
-    <input type='text' value='' placeholder="验证码"/>
-    <div class="timer">
-      重新发送(60)
+    <input type='text' value='code' placeholder="验证码" [(ngModel)]="code"/>
+    <div class="timer" *ngIf='isShow'>
+      倒计时({{num}})
     </div>
-   
+    <div class="timer" (tap)='sendCode()' *ngIf='!isShow'>
+        重新发送
+      </div>
   </div>
   <button ion-button block color='danger' class='reg-btn'  (click)='goRegisterPasswordPage()'>下一步</button>
 </ion-content>

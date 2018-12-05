@@ -15,7 +15,7 @@
 
 <ion-content>
     <div class='register-page'>
-      <input type="text" placeholder="请输入手机号">
+      <input type="text" placeholder="请输入手机号" [(ngModel)]="tel">
     </div>
     <button ion-button block color='danger' class='reg-btn' (click)='goRegisterCodePage()'>下一步</button>
 </ion-content>
