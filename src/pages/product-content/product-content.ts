@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { HttpServiceProvider } from '../../providers/http-service/http-service';
@@ -16,9 +16,11 @@ import { HttpServiceProvider } from '../../providers/http-service/http-service';
   templateUrl: 'product-content.html',
 })
 export class ProductContentPage {
+  @ViewChild('myattr') myattr:ElementRef;
   public pet = true;
   public tabs = 'plist';
-  public list = [];
+  public item:any={};
+  public num=1;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public configProvider: ConfigProvider,
@@ -28,14 +30,68 @@ export class ProductContentPage {
   }
 
   ionViewDidLoad() {
+    this.bindEvent();
     //console.log('ionViewDidLoad ProductContentPage');
   }
 
   requestData(id) {
-    this.list = [];
+    this.item={};
     this.httpServiceProvider.requestDataJsonp('api/pcontent?id=' + id, (data) => {
-      this.list.push(data['result']);
+      this.item=data['result'];
     })
   }
+
+  bindEvent(){
+    var attrDom=this.myattr.nativeElement;//doucuemnt.getElementById()
+    attrDom.onclick=(e)=>{
+      if(e.srcElement.nodeName=='SPAN'){
+        var ele=e.target;//获取span标签
+        var parentNode=ele.parentNode;//当前元素父节点
+        var children=parentNode.children;
+        for(let i=0;i<children.length;i++){
+          children[i].className='';
+        }
+        ele.className='active';
+      }
+    }
+  }
+
+  addCart(){
+    let productTitle=this.item.title;
+    let productId=this.item['_id'];
+    let productPic=this.item.pic;
+    let productPrice=this.item.price;
+    let productCount=this.num;
+    //商品属性
+    let productAttr='';
+    let activeDom=document.getElementsByClassName('active');
+    for(let i=0;i<activeDom.length;i++){
+      productAttr+=" "+activeDom[i].innerHTML;
+    }
+    console.log(productAttr);
+    let json={
+      productTitle,
+      productId,
+      productPic,
+      productPrice,
+      productCount,
+      productAttr
+    }
+    console.log(json);
+  }
+
+  addNumber(){
+    this.num++;
+  }
+
+  minusNumber(){
+    if(this.num<=1){
+
+    }else {
+      this.num-=1;
+    }
+   
+  }
+
 
 }

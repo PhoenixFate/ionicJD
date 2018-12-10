@@ -33,11 +33,11 @@ export class RegisterPage {
       this.httpServiceProvider.doPost('api/sendCode',{tel:this.tel},(data)=>{
         console.log(this.tel);
         console.log(data);
-        if(data.success || true){
+        if(data.success){
           this.storageProvider.set('tel',this.tel);
           this.navCtrl.push(RegisterCodePage);
         }else {
-          //alert("发送验证码失败")
+          alert("发送验证码失败, "+data.message)
         }
       })
     }else {

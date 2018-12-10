@@ -35,9 +35,9 @@ export class RegisterCodePage {
 
   goRegisterPasswordPage(){
     //验证验证码是否成功
-    this.httpServiceProvider.doPost('api/validateCode',{'tel':this.tel},(data)=>{
+    this.httpServiceProvider.doPost('api/validateCode',{'tel':this.tel,'code':this.code},(data)=>{
       console.log(data);
-      if(data.success || true){
+      if(data.success){
         this.storageProvider.set('code',this.code);
         this.navCtrl.push(RegisterPasswordPage);
       }else {

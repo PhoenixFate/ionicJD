@@ -113,13 +113,17 @@ page-product-content {
 
           /*运费颜色*/
 
-        .fee{
-            background: #fff;
-            padding: 1rem;
+            .fee{
+                background: #fff;
+                padding: 1rem;
+            }
+
         }
 
+        .active {
+            border:2px solid #f23030!important;
+        }
     }
-}
 
 
 
@@ -171,4 +175,6 @@ page-product-content {
      
     }
 }
+
+ 
 }

@@ -19,38 +19,40 @@
 
 
 <ion-content>
-  <div class="p_content" *ngFor='let item of list'>
+  <div class="p_content">
     <div [ngSwitch]="tabs">
       <div class="con_1" *ngSwitchCase="'plist'">
         <div class="p_img">
-          <img [src]="configProvider.urlHead+item.pic" alt=""> 
+          <img [src]="configProvider.urlHead+item['pic']" alt="">
         </div>
         <div class="p_info mb10">
           <div class="p_title">
-            <h2>{{item.title}}</h2>
-            <p>{{item.sub_title}}</p>
+            <h2>{{item['title']}}</h2>
+            <p>{{item['sub_title']}}</p>
           </div>
           <div class="product_price mb10">
-            <span class="now_price">特价：<span class="price">¥{{item.price}}</span></span> 　 　原价：<span class="old_price"> ¥{{item['old_price']}}</span>
+            <span class="now_price">特价：<span class="price">¥{{item['price']}}</span></span> 　 　原价：<span class="old_price">
+              ¥{{item['old_price']}}</span>
           </div>
         </div>
         <div class="p_attr mb10">
-          <div *ngIf='item.attr'>
-              <div class="color" *ngFor='let attr of item.attr'>
-                  <strong>{{attr.cate}}:</strong>
-                  <span *ngFor='let a of attr.list'>{{a}}</span>
-  
-                </div>
+          <div #myattr >
+            <div *ngIf="item['attr']">
+              <div class="color" *ngFor='let attr of item["attr"]'>
+                <strong>{{attr.cate}}:</strong>
+                <span *ngFor='let a of attr.list; let key=index ' [ngClass]="{'active':key==0}">{{a}}</span>
+              </div>
+            </div>
           </div>
-         
+
           <div class="number">
             <strong>数量:</strong>
             <div class="cart_number">
-              <div class="input_left">-</div>
+              <div class="input_left" (click)='minusNumber()'>-</div>
               <div class="input_center">
-                <input type="text" readonly="readonly" value="1" name="num" id="num" />
+                <input type="text" readonly="readonly" [(ngModel)]="num" name="num" id="num" />
               </div>
-              <div class="input_right">+</div>
+              <div class="input_right" (click)='addNumber()'>+</div>
             </div>
           </div>
         </div>
@@ -62,7 +64,7 @@
       </div>
 
       <div class="con_2" *ngSwitchCase="'pcontent'">
-        <div [innerHTML]='item.content'>
+        <div [innerHTML]='item["content"]'>
 
         </div>
       </div>
@@ -82,7 +84,7 @@
         <ion-badge color="danger">1</ion-badge>
       </div>
 
-      <div class="addcart">
+      <div class="addcart" (click)='addCart()'>
         加入购物车
       </div>
       <div class="buy">

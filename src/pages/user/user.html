@@ -14,7 +14,7 @@
 
 
 <ion-content >
-  <div class="login">
+  <div class="login" *ngIf='!isLogin'>
     <div class="user-img">
       <img src="assets/imgs/user.png" alt="">
     </div>
@@ -23,6 +23,18 @@
       <button ion-button [navPush]='RegisterPage'>注册</button>
     </div>
   </div>
+
+  <ion-list inset *ngIf='isLogin' class="">
+    <ion-item [navPush]='PersonalPage'>
+      <ion-avatar item-left>
+        <img src='' onerror="this.src='assets/imgs/user.png'" class="avatar">
+      </ion-avatar>
+      <h2>{{userinfo.username}}</h2>
+      <p>普通会员</p>
+      <ion-icon name='ios-arrow-forward' item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+  
   <ion-list inset>
     <ion-item-divider></ion-item-divider>
     <ion-item>

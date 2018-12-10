@@ -17,11 +17,11 @@
   <ion-list>
     <ion-item>
       <ion-label >账户：</ion-label>
-      <ion-input type='text' placeholder='手机号/账户'></ion-input>
+      <ion-input type='text' placeholder='手机号/账户' [(ngModel)]="userinfo.username"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label >密码：</ion-label>
-      <ion-input type='text' placeholder='请输入密码'></ion-input>
+      <ion-input type='password' placeholder='请输入密码' [(ngModel)]="userinfo.password"></ion-input>
     </ion-item>
     <ion-item no-lines class="login-list-end">
       <span item-start>
@@ -32,5 +32,5 @@
       </span>
     </ion-item>
   </ion-list>
-  <button ion-button color='danger' block class='login-btn'> 登录</button>
+  <button ion-button color='danger' block class='login-btn' (click)="doLogin()"> 登录</button>
 </ion-content>
