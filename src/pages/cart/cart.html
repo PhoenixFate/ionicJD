@@ -7,23 +7,23 @@
 </ion-header>
 
 <ion-content>
-  <dl class='cart-list'>
+  <dl class='cart-list' *ngFor='let item of list'>
     <dt>
       <ion-checkbox color='danger'></ion-checkbox>
-      <img src="assets/imgs/03.jpg" alt="">
+      <img [src]="configProvider.urlHead+item.productPic" alt="">
     </dt>
     <dd>
-      <h2>这是一个商品标题</h2>
+      <h2>{{item.productTitle}}</h2>
       <div class="cart-info">
         <div class="cart-price">
-          100元
+          {{item.productPrice}}元
         </div>
         <div class="cart-num">
           <div class="input-left">
             -
           </div>
           <div class="input-center">
-            <input type="text" value='1' readonly='readonly'>
+            <input type="text" [(ngModel)]='item.productCount' readonly='readonly'>
           </div>
           <div class="input-right">
             +

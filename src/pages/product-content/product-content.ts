@@ -2,7 +2,8 @@ import { Component, ViewChild, ElementRef} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { HttpServiceProvider } from '../../providers/http-service/http-service';
-
+import { StorageProvider } from './../../providers/storage/storage';
+import { CartPage } from '../cart/cart';
 /**
  * Generated class for the ProductContentPage page.
  *
@@ -17,16 +18,20 @@ import { HttpServiceProvider } from '../../providers/http-service/http-service';
 })
 export class ProductContentPage {
   @ViewChild('myattr') myattr:ElementRef;
+  public CartPage=CartPage;
   public pet = true;
   public tabs = 'plist';
   public item:any={};
   public num=1;
+  public cartNumber=0;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public configProvider: ConfigProvider,
-    public httpServiceProvider: HttpServiceProvider) {
+    public httpServiceProvider: HttpServiceProvider,
+    public storageProvider:StorageProvider) {
     let id = navParams.get('id');
     this.requestData(id);
+    this.cartNumber=this.getCartNumber();
   }
 
   ionViewDidLoad() {
@@ -78,6 +83,26 @@ export class ProductContentPage {
       productAttr
     }
     console.log(json);
+    let storageData=this.storageProvider.get('cartData');
+    if(storageData){
+      if(this.hasData(storageData,productId)){//购物车有数据
+        //修改数量
+        for(let i=0;i<storageData.length;i++){
+          if(storageData[i].productId==productId){
+            storageData[i].productCount+=1;
+          }
+        }
+      }else {//购物车没有数据
+        storageData.push(json);
+        
+      }
+      this.storageProvider.set('cartData',storageData);
+    }else {
+       let temp=[];
+       temp.push(json);
+       this.storageProvider.set('cartData',temp);
+    }
+    this.cartNumber+=1;
   }
 
   addNumber(){
@@ -91,6 +116,29 @@ export class ProductContentPage {
       this.num-=1;
     }
    
+  }
+
+  //
+  hasData(storageData,productId){
+    if(storageData){
+      for(let i=0;i<storageData.length;i++){
+        if(storageData[i].productId==productId){
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+
+  getCartNumber(){
+    let num=0;
+    let storageData=this.storageProvider.get('cartData');
+    if(storageData){
+      for(let i=0;i<storageData.length;i++){
+        num+=storageData[i].productCount;
+      }
+    }
+    return num;
   }
 
 
