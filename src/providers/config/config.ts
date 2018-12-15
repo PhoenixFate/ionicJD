@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class ConfigProvider {
-  public urlHead:string='http://39.108.159.135/';
+  public urlHead:string='http://jd.itying.com/';
 
   constructor() {
     //console.log('Hello ConfigProvider Provider');

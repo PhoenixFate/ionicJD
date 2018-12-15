@@ -3,13 +3,22 @@
     <ion-title>
       购物车
     </ion-title>
+    <ion-buttons end>
+      <button ion-button (tap)='isEdit=!isEdit'>
+        <span *ngIf='!isEdit'>编辑</span><span *ngIf='isEdit'>完成</span>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <div class='my-spinner' *ngIf='list.length==0'>
+      <ion-spinner></ion-spinner>
+  </div>
+
   <dl class='cart-list' *ngFor='let item of list'>
     <dt>
-      <ion-checkbox color='danger'></ion-checkbox>
+      <ion-checkbox color='danger' [(ngModel)]="item.checked" (ionChange)='updageCart()'></ion-checkbox>
       <img [src]="configProvider.urlHead+item.productPic" alt="">
     </dt>
     <dd>
@@ -19,13 +28,13 @@
           {{item.productPrice}}元
         </div>
         <div class="cart-num">
-          <div class="input-left">
+          <div class="input-left" (tap)='decCount(item)'>
             -
           </div>
           <div class="input-center">
             <input type="text" [(ngModel)]='item.productCount' readonly='readonly'>
           </div>
-          <div class="input-right">
+          <div class="input-right" (tap)='incCount(item)'>
             +
           </div>
         </div>
@@ -34,19 +43,28 @@
   </dl>
 </ion-content>
 
-
-
-
-
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar *ngIf='!isEdit'>
     <div class='all-price'>
-      <ion-checkbox color='danger'></ion-checkbox>
-      全选    <strong>合计: 2000元</strong>  
+      <ion-checkbox color='danger' (ionChange)='checkAll()' [(ngModel)]="isChecked"></ion-checkbox>
+      全选    <strong>合计: {{allPrice}}元</strong>  
     </div>
     <ion-buttons end>
-      <button ion-button icon-right >
-        Send
+      <button ion-button icon-right (click)='doPay()'>
+        去结算
+        <ion-icon name='send'></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf='isEdit'>
+    <div class='all-price'>
+      <ion-checkbox color='danger' (ionChange)='checkAll()' [(ngModel)]="isChecked"></ion-checkbox>
+      全选   
+    </div>
+    <ion-buttons end >
+      <button ion-button icon-right (click)='doDelete()'>
+        删除
         <ion-icon name='send'></ion-icon>
       </button>
     </ion-buttons>

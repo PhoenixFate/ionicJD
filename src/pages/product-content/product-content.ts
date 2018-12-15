@@ -24,19 +24,24 @@ export class ProductContentPage {
   public item:any={};
   public num=1;
   public cartNumber=0;
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     public configProvider: ConfigProvider,
     public httpServiceProvider: HttpServiceProvider,
     public storageProvider:StorageProvider) {
     let id = navParams.get('id');
     this.requestData(id);
-    this.cartNumber=this.getCartNumber();
+  
   }
 
   ionViewDidLoad() {
     this.bindEvent();
     //console.log('ionViewDidLoad ProductContentPage');
+  }
+
+  ionViewWillEnter(){
+    this.cartNumber=this.getCartNumber();
   }
 
   requestData(id) {
@@ -80,7 +85,8 @@ export class ProductContentPage {
       productPic,
       productPrice,
       productCount,
-      productAttr
+      productAttr,
+      checked:true
     }
     console.log(json);
     let storageData=this.storageProvider.get('cartData');
@@ -89,12 +95,11 @@ export class ProductContentPage {
         //修改数量
         for(let i=0;i<storageData.length;i++){
           if(storageData[i].productId==productId){
-            storageData[i].productCount+=1;
+            storageData[i].productCount+=this.num;
           }
         }
       }else {//购物车没有数据
         storageData.push(json);
-        
       }
       this.storageProvider.set('cartData',storageData);
     }else {
@@ -102,7 +107,7 @@ export class ProductContentPage {
        temp.push(json);
        this.storageProvider.set('cartData',temp);
     }
-    this.cartNumber+=1;
+    this.cartNumber+=this.num;
   }
 
   addNumber(){

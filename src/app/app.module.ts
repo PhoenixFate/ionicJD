@@ -1,3 +1,4 @@
+import { OrderPage } from './../pages/order/order';
 import { PersonalPage } from './../pages/personal/personal';
 import { ProductContentPage } from './../pages/product-content/product-content';
 import { ProductListPage } from './../pages/product-list/product-list';
@@ -41,7 +42,8 @@ import { StorageProvider } from '../providers/storage/storage';
     SearchPage,
     ProductListPage,
     ProductContentPage,
-    PersonalPage
+    PersonalPage,
+    OrderPage
   ],
   imports: [
     HttpModule,
@@ -67,7 +69,8 @@ import { StorageProvider } from '../providers/storage/storage';
     SearchPage,
     ProductListPage,
     ProductContentPage,
-    PersonalPage
+    PersonalPage,
+    OrderPage
   ],
   providers: [
     StatusBar,
