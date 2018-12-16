@@ -14,8 +14,8 @@
   <div class="order">
     <div class="address_list">
       <ion-list *ngIf="userinfo">
-        <ion-item>
-          <ion-icon name="ios-pin-outline" item-start></ion-icon>
+        <ion-item [navPush]='AddressPage'>
+          <ion-icon name="ios-pin-outline" item-start ></ion-icon>
           请添加您的收货地址
           <ion-icon name="ios-arrow-forward" item-end></ion-icon>
         </ion-item>
@@ -32,11 +32,11 @@
       <ion-list>
         <ion-item *ngFor="let item of list">
           <ion-thumbnail item-left>
-            <img [src]="configProvider.urlHead+item.product_pic" />
+            <img [src]="configProvider.urlHead+item.productPic" />
           </ion-thumbnail>
-          <h2>{{item.product_title}}</h2>
-          <p><span class="price">¥{{item.product_price}}</span> <span class="count">x{{item.product_count}}</span></p>
-          <p>属性：{{item.product_attr}}</p>
+          <h2>{{item.productTitle}}</h2>
+          <p><span class="price">¥{{item.product_price}}</span> <span class="count">x{{item.productCount}}</span></p>
+          <p>属性：{{item.productAttr}}</p>
         </ion-item>
       </ion-list>
 

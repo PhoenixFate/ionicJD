@@ -19,11 +19,12 @@ export class LoginPage {
     "username":"",
     "password":""
   }
-
+  public history=''; 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public storageProvider:StorageProvider,
     public httpServiceProvider: HttpServiceProvider) {
+      this.history=this.navParams.get('history');
   }
 
   ionViewDidLoad() {
@@ -38,7 +39,11 @@ export class LoginPage {
           //登录成功
           //保存用户信息
           this.storageProvider.set('userinfo',data.userinfo[0]);
-          this.navCtrl.popToRoot();
+          if(this.history=='order'){
+             this.navCtrl.pop();
+          }else {
+            this.navCtrl.popToRoot();
+          }
         }else {
           alert(data.message+"");
         }

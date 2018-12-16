@@ -26,6 +26,9 @@ import { RegisterPasswordPage } from '../pages/register-password/register-passwo
 import { ConfigProvider } from '../providers/config/config';
 import { HttpServiceProvider } from '../providers/http-service/http-service';
 import { StorageProvider } from '../providers/storage/storage';
+import { ToolsProvider } from '../providers/tools/tools';
+import { AddressPage } from '../pages/address/address';
+import { AddAddressPage } from '../pages/add-address/add-address';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,9 @@ import { StorageProvider } from '../providers/storage/storage';
     ProductListPage,
     ProductContentPage,
     PersonalPage,
-    OrderPage
+    OrderPage,
+    AddressPage,
+    AddAddressPage
   ],
   imports: [
     HttpModule,
@@ -70,7 +75,9 @@ import { StorageProvider } from '../providers/storage/storage';
     ProductListPage,
     ProductContentPage,
     PersonalPage,
-    OrderPage
+    OrderPage,
+    AddressPage,
+    AddAddressPage 
   ],
   providers: [
     StatusBar,
@@ -79,6 +86,7 @@ import { StorageProvider } from '../providers/storage/storage';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpServiceProvider,
     StorageProvider,
+    ToolsProvider,
     
   ]
 })

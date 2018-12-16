@@ -7,6 +7,8 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 
 import { HttpServiceProvider } from '../../providers/http-service/http-service';
+import { ToolsProvider } from '../../providers/tools/tools';
+import { AddressPage } from '../address/address';
 
 /**
  * Generated class for the OrderPage page.
@@ -21,27 +23,26 @@ import { HttpServiceProvider } from '../../providers/http-service/http-service';
   templateUrl: 'order.html',
 })
 export class OrderPage {
-  public list=[];
-  public LoginPage=LoginPage;
-
-  public userinfo='';
-  constructor(public navCtrl: NavController, 
+  public list = [];
+  public LoginPage = LoginPage;
+  public AddressPage=AddressPage;
+  public userinfo = '';
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public configProvider: ConfigProvider,
     public httpServiceProvider: HttpServiceProvider,
-    public storageProvider: StorageProvider) {
+    public storageProvider: StorageProvider,
+    public toolsProvider:ToolsProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrderPage');
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     //获取订单信息
-    this.list=this.storageProvider.get('orderData');
-    console.log(this.list);
- 
-
-}
+    this.list = this.storageProvider.get('orderData');
+    this.userinfo=this.toolsProvider.getUserInfo();
+  }
 
 }
