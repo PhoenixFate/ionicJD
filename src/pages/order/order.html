@@ -13,10 +13,17 @@
 
   <div class="order">
     <div class="address_list">
-      <ion-list *ngIf="userinfo">
+      <ion-list *ngIf="userinfo && !address">
         <ion-item [navPush]='AddressPage'>
           <ion-icon name="ios-pin-outline" item-start ></ion-icon>
           请添加您的收货地址
+          <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+        </ion-item> 
+      </ion-list>
+      <ion-list *ngIf="userinfo && address">
+        <ion-item [navPush]='AddressPage'>
+          <h2>{{address['name']}}       {{address['phone']}}</h2>
+          <p>{{address['address']}}</p>
           <ion-icon name="ios-arrow-forward" item-end></ion-icon>
         </ion-item>
       </ion-list>
@@ -50,15 +57,15 @@
         </ion-item-divider>
         <ion-item class="order_price">
           <ul>
-            <li>商品总金额 <span>¥124214</span></li>
-            <li>立减 <span>-¥5</span></li>
+            <li>商品总金额 <span>¥{{allPrice}}</span></li>
+            <li>立减 <span>-¥0</span></li>
             <li>运费 <span>+¥0</span></li>
           </ul>
         </ion-item>
         <ion-item-divider>
         </ion-item-divider>
         <ion-item>
-          <input type="text" placeholder="选填:给商家留言45字以内" />
+          <input type="text" placeholder="选填:给商家留言45字以内" [(ngModel)]="leaveMessage"/>
         </ion-item>
       </ion-list>
     </div>
@@ -71,8 +78,8 @@
 <ion-footer>
   <ion-toolbar>
     <div class="order_footer">
-      <span>实付款: ¥2934</span>
-      <div class="buy_order">
+      <span>实付款: ¥{{allPrice}}</span>
+      <div class="buy_order" (tap)='goPayment()'>
         立即下单
       </div>
     </div>

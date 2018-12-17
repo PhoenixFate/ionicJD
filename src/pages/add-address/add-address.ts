@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { ToolsProvider } from './../../providers/tools/tools';
+import { HttpServiceProvider } from '../../providers/http-service/http-service';
+
 /**
  * Generated class for the AddAddressPage page.
  *
@@ -14,12 +17,46 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'add-address.html',
 })
 export class AddAddressPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public addressList = {
+    name: '',
+    phone: '',
+    address: ''
+  }
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public httpServiceProvider: HttpServiceProvider,
+    public toolsProvider: ToolsProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddAddressPage');
   }
 
+  addAddress() {
+    if (this.addressList.name == '' || this.addressList.phone == '' || this.addressList.address == '') {
+      alert('空');
+      return;
+    }
+    let userInfo = this.toolsProvider.getUserInfo();
+
+    let json = {
+      uid: userInfo._id,
+      salt: userInfo.salt,
+      name: this.addressList.name,
+      phone: this.addressList.phone,
+      address: this.addressList.address
+    }
+
+    let sign = this.toolsProvider.sign(json);
+    let postJson = {
+      uid: userInfo._id,
+      sign: sign,
+      name: this.addressList.name,
+      phone: this.addressList.phone,
+      address: this.addressList.address
+    }
+    this.httpServiceProvider.doPost('api/addAddress', postJson, (data) => {
+      console.log(data);
+    })
+  }
 }

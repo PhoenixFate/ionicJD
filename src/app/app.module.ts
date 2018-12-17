@@ -1,3 +1,4 @@
+import { PaymentPage } from './../pages/payment/payment';
 import { OrderPage } from './../pages/order/order';
 import { PersonalPage } from './../pages/personal/personal';
 import { ProductContentPage } from './../pages/product-content/product-content';
@@ -29,6 +30,7 @@ import { StorageProvider } from '../providers/storage/storage';
 import { ToolsProvider } from '../providers/tools/tools';
 import { AddressPage } from '../pages/address/address';
 import { AddAddressPage } from '../pages/add-address/add-address';
+import { EditAddressPage } from '../pages/edit-address/edit-address';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { AddAddressPage } from '../pages/add-address/add-address';
     PersonalPage,
     OrderPage,
     AddressPage,
-    AddAddressPage
+    AddAddressPage,
+    EditAddressPage,
+    PaymentPage
   ],
   imports: [
     HttpModule,
@@ -77,7 +81,9 @@ import { AddAddressPage } from '../pages/add-address/add-address';
     PersonalPage,
     OrderPage,
     AddressPage,
-    AddAddressPage 
+    AddAddressPage,
+    EditAddressPage,
+    PaymentPage
   ],
   providers: [
     StatusBar,
